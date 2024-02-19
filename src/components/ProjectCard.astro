@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import ProjectCardTag from "./ProjectCardTag.astro";
+interface Props {
+    year: number;
+    title: string;
+    description: string;
+    tags: string[];
+    class?: string;
+    vertical?: boolean;
+}
+
+const { year, title, description, tags, vertical, image } = Astro.props
+---
+
+<div
+    class="w-full flex flex-col px-12 py-8 border border-[#2C182A] rounded-lg bg-[#140913]/45 backdrop-blur-sm z-10"
+    class:list={[Astro.props.class]}>
+    <div
+        class="w-full h-full flex justify-between gap-6 "
+        data-focus-on-center
+        class:list={[
+            'flex-col',
+            vertical ? 'lg:flex-col' : 'lg:flex-row'
+        ]}>
+        <div class="w-full flex flex-col gap-4">
+            <p class="text-sm text-gray-400/30">
+                {year}
+            </p>
+            <h3 class="text-xl font-semibold">
+                {title}
+            </h3>
+            <p class="text-wrap text-lg">
+                {description}
+            </p>
+            <div class="w-full flex flex-wrap items-start justify-start gap-2">
+                {tags.map((tag: string) => (
+                    <ProjectCardTag label={tag}/>
+                ))}
+            </div>
+        </div>
+        <div class="flex flex-shrink-0 w-auto">
+            <div
+                class="bg-[#21141F] border border-[#2C182A] rounded-lg overflow-hidden w-full"
+                class:list={[
+                    !vertical ? 'lg:h-full lg:w-64' : 'lg:h-48 lg:w-full'
+                ]}>
+                {image && (
+                    <div class="w-full h-full rounded-lg relative">
+                        <Image src={image} height="600" width="600" alt={title}/>
+                        <!--<div class="absolute inset-0 bg-[#2C182A]/80"></div>-->
+                    </div>
+                )}
+            </div>
+        </div>
+    </div>
+</div>

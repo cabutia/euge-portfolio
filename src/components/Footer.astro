@@ -1,0 +1,37 @@
+---
+import logoImage from "../assets/logo_dark.svg";
+import dribbbleIcon from "../assets/dribbble.png";
+import behanceIcon from "../assets/behance.png";
+import linkedinIcon from "../assets/linkedin.png";
+import {Image} from "astro:assets";
+---
+<div class="w-full bg-[#C7BCC6]">
+    <div class="content py-6 flex justify-between">
+        <div class="flex flex-col gap-2">
+            <p class="text-[#A79AA5] uppercase text-sm">Links</p>
+            <ul class="text-dark2 font-semibold">
+                <li>Volver arriba</li>
+                <li>Proyectos</li>
+                <li>Sobre mi</li>
+                <li>Descargar CV</li>
+            </ul>
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <p class="text-[#A79AA5] uppercase text-sm">Redes</p>
+            <ul class="flex gap-4">
+                <li>
+                    <Image src={dribbbleIcon} alt="Dribbble"/>
+                </li>
+                <li>
+                    <Image src={behanceIcon} alt="Bēhance"/>
+                </li>
+                <li>
+                    <Image src={linkedinIcon} alt="LinkedIn"/>
+                </li>
+            </ul>
+        </div>
+
+        <Image src={logoImage} alt="Eugenia Grotnig"/>
+    </div>
+</div>

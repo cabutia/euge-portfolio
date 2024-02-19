@@ -1,0 +1,90 @@
+---
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import blob1Image from "../assets/blob_1.png";
+import blob2Image from "../assets/blob_2.png";
+import deco1Image from "../assets/deco_1.png";
+import hexagonImage from "../assets/hexagon-1.svg";
+import squareImage from "../assets/square-1.svg";
+import decoLogoImage from "../assets/deco_logo.png";
+import {Image} from "astro:assets";
+import ContactForm from "../components/ContactForm.astro";
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@200;400;600;700&display=swap" rel="stylesheet">
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="w-screen overflow-x-hidden">
+		<Navbar/>
+		<slot />
+		<div class="w-full pt-16">
+			<ContactForm/>
+			<Footer/>
+		</div>
+		<Image src={hexagonImage} alt="" class="-z-[1] absolute right-0 top-[45vh] backdrop-blur-sm" data-parallax/>
+		<Image src={squareImage} alt="" class="-z-[1] absolute left-0 top-[10vh] backdrop-blur-sm" data-parallax/>
+		<Image src={deco1Image} alt="" class="-z-[1] absolute top-[150vh] right-[10%]" data-parallax/>
+		<Image src={deco1Image} alt="" class="-z-[1] absolute top-[200vh] left-[10%] " data-parallax/>
+		<Image src={decoLogoImage} alt="" class="-z-[1] absolute top-[250vh] right-[10%]  " data-parallax/>
+	</body>
+</html>
+<style is:global>
+	html {
+		@apply bg-dark text-white;
+	}
+
+	.content {
+		@apply w-full max-w-4xl mx-auto px-8 lg:px-0;
+	}
+</style>
+
+<script>
+	import SimpleParallax from "simple-parallax-js";
+	const targets = document.querySelectorAll('[data-parallax]');
+	new SimpleParallax(targets, {
+		overflow: true,
+		delay: .6,
+		scale: 3
+	})
+
+	const focusableElements = document.querySelectorAll('[data-focus-on-center]');
+	for (let i = 0; i < focusableElements.length; i++) {
+		const el = focusableElements[i];
+		el.classList.add('opacity-40');
+		el.classList.add('transition-opacity')
+	}
+	window.addEventListener('scroll', () => {
+		const offset = window.innerHeight * 0.2;
+		const center = window.scrollY + window.innerHeight / 2;
+		for (let i = 0; i < focusableElements.length; i++) {
+			const el = focusableElements[i];
+			const rect = el.getBoundingClientRect();
+			const distance = window.pageYOffset + rect.top + el.offsetHeight / 2;
+			if (Math.abs(center - distance) < offset) {
+				el.classList.add('opacity-100')
+				el.classList.remove('opacity-40')
+			} else {
+				el.classList.remove('opacity-100')
+				el.classList.add('opacity-40')
+			}
+		}
+	})
+
+</script>
+
+<script src="https://web3forms.com/client/script.js" async defer></script>

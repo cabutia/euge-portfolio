@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from "../components/Button.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { getCollection } from 'astro:content';
+import swirlsImage from '../assets/swirls.svg';
+import { Image } from "astro:assets";
+
+const projects = await getCollection('projects');
+console.log(projects[0].data)
+---
+
+<Layout title="Euge 🚀 | UX/UI Designer">
+	<!-- Header -->
+	<div class="h-screen w-full -mt-20 relative overflow-x-hidden">
+		<!-- Decoration -->
+		<div class="absolute top-1/2 -translate-y-1/2 -left-[25vw] w-[150vw] bg-red-500 h-1/2 rounded-[100%] bg-gradient-to-r from-[#16336B] to-[#812ED4] blur-3xl -z-[1] opacity-[0.38]"></div>
+		<div class="absolute inset-0 w-full h-full -z-[2]">
+			<Image src={swirlsImage} alt="" class="w-full h-full opacity-10"/>
+		</div>
+		<!-- End decoration -->
+		<div class="content h-full flex flex-col justify-center gap-4">
+			<h1 class="font-display text-6xl">Hola, soy Euge!</h1>
+			<div class="flex flex-col">
+				<h2 class="text-2xl font-thin">
+					Soy diseñadora UX/UI y diseñadora gráfica 🇦🇷.
+				</h2>
+				<p class="text-2xl font-thin">
+					Empatía, creatividad y motivación son mi fuerte, me enfoco en la inclusividad y la accesibilidad de los
+					productos que creo.
+				</p>
+				<div class="w-full mt-4">
+					<Button label="Charlemos!"/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="w-full relative">
+		<div class="content flex flex-col gap-6">
+			<div class="flex flex-col gap-2">
+				<h2 class="font-display text-2xl">Proyectos</h2>
+				<p class="text-xl font-thin">
+					Me involucro en cada etapa del desarrollo para asegurar un resultado de la mejor calidad posible.
+				</p>
+			</div>
+			<div class="w-full grid grid-cols-2 gap-4">
+				{projects.map((project) => (
+					<ProjectCard
+						class:list={[
+							'col-span-2',
+							project.data.size === 'normal' ? 'lg:col-span-1' : 'lg:col-span-2'
+						]}
+						vertical={project.data.size === 'normal'}
+						year={`${project.data.year}`}
+						title={project.data.title}
+						description={project.data.description}
+						tags={project.data.tags}
+						image={project.data.image}/>
+				))}
+			</div>
+		</div>
+	</div>
+</Layout>

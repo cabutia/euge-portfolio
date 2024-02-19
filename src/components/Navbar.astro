@@ -1,0 +1,15 @@
+---
+import logoImage from "../assets/logo.svg";
+import {Image} from "astro:assets";
+import NavbarLink from "./NavbarLink.astro";
+---
+<div class="w-full h-20">
+    <div class="content h-full flex justify-between items-center">
+        <Image src={logoImage} alt="Eugenia Grotnig"/>
+        <div class="flex items-center flex-shrink-0 gap-2">
+            <NavbarLink label="Sobre mi"/>
+            <NavbarLink label="Proyectos"/>
+            <NavbarLink primary label="Contacto"/>
+        </div>
+    </div>
+</div>

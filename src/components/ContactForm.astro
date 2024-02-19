@@ -1,0 +1,41 @@
+---
+import {Image} from "astro:assets";
+import logoImage from '../assets/logo.svg';
+import swirlsImage from '../assets/swirls.svg';
+import circleImage from '../assets/circle-1.svg';
+import hexagonImage from '../assets/hexagon-1.svg';
+---
+
+<form class="w-full bg-black py-16 relative border-y border-[#140913] overflow-hidden">
+    <div class="absolute w-full h-full inset-0 overflow-hidden">
+        <Image src={swirlsImage} class="w-full opacity-100" alt=""/>
+    </div>
+    <div class="absolute -top-64 -left-64">
+        <Image src={hexagonImage} alt="" class="opacity-80"/>
+    </div>
+    <div class="absolute -bottom-64 -right-64">
+        <Image src={circleImage} alt="" class="opacity-80"/>
+    </div>
+    <div class="content bg-[#140913]/45 backdrop-blur-sm border border-[#2C182A] rounded-lg">
+        <div class="w-full flex flex-col lg:flex-row gap-6">
+            <div class="w-full flex flex-col gap-4 p-8">
+                <p class="font-bold text-xl -mt-2 pb-2">Charlemos!</p>
+                <input type="text" placeholder="Tu nombre" class="text-sm px-6 py-3 border border-[#2C182A] rounded-lg text-white/80 bg-[#140913]">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" placeholder="Email" class="text-sm px-6 py-3 border border-[#2C182A] rounded-lg text-white/80 bg-[#140913]">
+                    <input type="text" placeholder="Teléfono" class="text-sm px-6 py-3 border border-[#2C182A] rounded-lg text-white/80 bg-[#140913]">
+                </div>
+                <textarea rows="5" class="text-sm px-6 py-3 border border-[#2C182A] rounded-lg text-white/80 bg-[#140913]" placeholder="Trabajemos juntos!"></textarea>
+                <button type="submit" class="py-2 px-4 bg-[#B537A8] font-medium text-white rounded-lg flex items-center justify-center relative">
+                    Enviar mensaje
+                </button>
+            </div>
+            <div class="w-full flex flex-col gap-4 items-center justify-center bg-dark2/40 backdrop-blur-sm p-8 relative">
+                <Image src={logoImage} alt="Logo" class="w-32 h-32"/>
+                <p class="font-semibold">Eugenia Grotnig</p>
+                <div class="w-12 h-px bg-white/20"></div>
+                <p class="text-sm">UI/UX Designer</p>
+            </div>
+        </div>
+    </div>
+</form>
